@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { count, length } from  './number';
 
 const day = 2;
 const month = 'september';
@@ -27,7 +28,8 @@ function App() {
           {false}
           {true}
           {null}
-          </div>
+        </div>
+        <div>{count * length}</div>
         <a
           className="App-link"
           href="https://reactjs.org"
