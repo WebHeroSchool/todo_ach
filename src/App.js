@@ -1,18 +1,14 @@
 import React from 'react';
-
-const ItemList = () => (
-  <div>
-    <ul>
-      <li>a</li>
-      <li>b</li>
-      <li>c</li>
-    </ul>
-  </div>
-);
+import { InputItem } from './components/InputItem/InputItem';
+import { ItemList } from './components/ItemList/ItemList';
+import { Footer } from './components/Footer/Footer';
+;
 const App = () => (
   <div>
-    <p>first effort to add item list</p>
+    <h1>Важные дела</h1>
+    <InputItem />
     <ItemList />
+    <Footer />
   </div>
 );
 
