@@ -7,8 +7,8 @@ const App = () => (
   <div>
     <h1>Важные дела</h1>
     <InputItem />
-    <ItemList />
-    <Footer />
+    <ItemList one={'первое'} two={'второе'} three={'третье'}/>
+    <Footer count={3}/>
   </div>
 );
 
