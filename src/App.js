@@ -2,7 +2,8 @@ import React from 'react';
 import { InputItem } from './components/InputItem/InputItem';
 import { ItemList } from './components/ItemList/ItemList';
 import { Footer } from './components/Footer/Footer';
-;
+import './App.css';
+
 const App = () => {
   const Itemslist = [
     {
@@ -16,8 +17,8 @@ const App = () => {
     }];
 
   return (
-  <div>
-    <h1>Важные дела</h1>
+  <div className="container">
+    <h1 className="container_title">Важные дела</h1>
     <InputItem />
     <ItemList items={Itemslist}/>
     <Footer count={3}/>
