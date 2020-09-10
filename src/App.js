@@ -1,46 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { count, length } from  './number';
+import { InputItem } from './components/InputItem/InputItem';
+import { ItemList } from './components/ItemList/ItemList';
+import { Footer } from './components/Footer/Footer';
+import  styles from './App.module.css';
 
-const day = 2;
-const month = 'september';
-const flag = true;
+const App = () => {
+  const Itemslist = [
+    {
+      value: 'первое'
+    },
+    {
+      value:'второе'
+    },
+    {
+      value: 'третье'
+    }];
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-	      <h1 style={{
-          color: "red",
-          fontSize: 10 + 12
-          }}>
-            First comment {day} {month}
-        </h1>
-        <div>{flag && 'I do it'}</div>
-        <div>
-          {flag ? 'congratulations' : 'do not worry'}
-          {undefined}
-          {false}
-          {true}
-          {null}
-        </div>
-        <div>{count * length}</div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div className={styles.container}>
+    <h1 className={styles.container_title}>Важные дела</h1>
+    <InputItem />
+    <ItemList items={Itemslist}/>
+    <Footer count={3}/>
+  </div>
+);
 }
 
 export default App;

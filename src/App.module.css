@@ -1,0 +1,20 @@
+.container {
+    display: block;
+    background-color: darkgray;
+    margin: auto;
+    width: 300px;
+}
+
+.container_title {
+    color: darkgreen;
+    text-align: center;
+}
+
+.container_list {
+    color: darkred;;
+}
+
+.footer {
+    font-weight: bold;
+    color: darkred;
+}
