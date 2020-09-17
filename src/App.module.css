@@ -6,7 +6,7 @@
 }
 
 .container_title {
-    color: darkgreen;
+    color:black;
     text-align: center;
 }
 
@@ -17,4 +17,12 @@
 .footer {
     font-weight: bold;
     color: darkred;
+}
+
+.item {
+    color: chocolate;
+}
+
+.done {
+    color: gray;
 }

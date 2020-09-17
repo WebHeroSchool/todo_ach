@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { InputItem } from './components/InputItem/InputItem';
 import { ItemList } from './components/ItemList/ItemList';
 import { Footer } from './components/Footer/Footer';
@@ -7,13 +8,16 @@ import  styles from './App.module.css';
 const App = () => {
   const Itemslist = [
     {
-      value: 'первое'
+      value: 'первое',
+      isDone: false
     },
     {
-      value:'второе'
+      value:'второе',
+      isDone: true
     },
     {
-      value: 'третье'
+      value: 'третье',
+      isDone: false
     }];
 
   return (
@@ -21,7 +25,7 @@ const App = () => {
     <h1 className={styles.container_title}>Важные дела</h1>
     <InputItem />
     <ItemList items={Itemslist}/>
-    <Footer count={3}/>
+    <Footer classes={styles} count={3}/>
   </div>
 );
 }
