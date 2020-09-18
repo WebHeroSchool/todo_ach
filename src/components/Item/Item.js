@@ -6,29 +6,28 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import  styles from '../../App.module.css';
 
-class Item extends React.Component {
-    render() {
-        return <span>
+const Item = (props) => (
+            <span>
             <Checkbox
-                checked={this.props.isDone}
-                onClick={()=>this.props.onButton(this.props.isDone)}
+                checked={props.isDone}
+                onClick={()=>props.onButton(props.isDone)}
                 ></Checkbox>
                     <span className={
                         classnames({
                             [styles.item]: true,
-                            [styles.done]: this.props.isDone
+                            [styles.done]: props.isDone
                         })
                         }
-                        >{this.props.action}
+                        >{props.action}
                     </span>
                     <span>
                         <IconButton aria-label="delete" >
                                 <DeleteIcon />
                         </IconButton>
                     </span>
-                </span>
-    }
-};
+                </span>)
+
+
 
 
 export { Item };
