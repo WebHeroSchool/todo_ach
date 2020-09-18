@@ -6,7 +6,7 @@
 }
 
 .container_title {
-    color: darkgreen;
+    color:black;
     text-align: center;
 }
 
@@ -18,3 +18,16 @@
     font-weight: bold;
     color: darkred;
 }
+
+.item {
+    color: green;
+}
+
+.done {
+    color: gray;
+}
+
+.input {
+    text-align: center;
+}
+
