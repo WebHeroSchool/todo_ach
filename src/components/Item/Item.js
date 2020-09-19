@@ -10,7 +10,7 @@ const Item = (props) => (
             <span>
             <Checkbox
                 checked={props.isDone}
-                onClick={()=>props.onButton(props.isDone)}
+                onClick={()=>props.onButton(props.id)}
                 ></Checkbox>
                     <span className={
                         classnames({

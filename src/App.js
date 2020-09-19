@@ -9,17 +9,21 @@ class App extends React.Component {
   state = {
     Itemslist: [
       {
+        id: 1,
         value: 'первое - проснуться пораньше',
         isDone: false
       },
       {
+        id: 2,
         value:'второе - почитать',
         isDone: true
       },
       {
+        id:3,
         value: 'третье - погулять',
         isDone: false
-      }]
+      }],
+      count: 6
   };
 
   //constructor(props) {
@@ -27,7 +31,20 @@ class App extends React.Component {
   //  this.onButton = this.onButton.bind(this);
  // }
 
-  onButton = (event) => console.log("press=",event)
+  onButton = (id) => {
+    const newItemsList = this.state.Itemslist.map(item=>{
+      const newItem = { ...item }
+      if (item.id === id) {
+        newItem.isDone = !item.isDone;
+      }
+
+      return newItem;
+
+    });
+    this.setState({Itemslist: newItemsList})
+    console.log("press=",id)
+  
+  }
   
 
   render() {
@@ -36,7 +53,7 @@ class App extends React.Component {
       <h1 className={styles.container_title}>Важные дела</h1>
       <InputItem />
       <ItemList items={this.state.Itemslist} onButton={this.onButton}/>
-      <Footer classes={styles} count={3}/>
+      <Footer classes={styles} count={this.state.count}/>
     </div>
   );
   };
