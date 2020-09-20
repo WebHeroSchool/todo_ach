@@ -45,6 +45,13 @@ class App extends React.Component {
     console.log("press=",id)
   
   }
+
+  onDelete = (id) => {
+    const newItemsList = this.state.Itemslist.filter(item => {
+      return item.id !== id
+    })
+    this.setState({ Itemslist: newItemsList, count: newItemsList.length })
+  };
   
 
   render() {
@@ -52,8 +59,12 @@ class App extends React.Component {
     <div className={styles.container}>
       <h1 className={styles.container_title}>Важные дела</h1>
       <InputItem />
-      <ItemList items={this.state.Itemslist} onButton={this.onButton}/>
-      <Footer classes={styles} count={this.state.count}/>
+      <ItemList 
+      items={this.state.Itemslist} 
+      onButton={this.onButton}
+      onDelete={this.onDelete}
+      />
+      <Footer classes={styles} count={this.state.Itemslist.length}/>
     </div>
   );
   };

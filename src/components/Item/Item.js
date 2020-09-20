@@ -21,7 +21,10 @@ const Item = (props) => (
                         >{props.action}
                     </span>
                     <span>
-                        <IconButton aria-label="delete" >
+                        <IconButton 
+                        aria-label="delete"
+                        onClick={()=>props.onDelete(props.id)}
+                        >
                                 <DeleteIcon />
                         </IconButton>
                     </span>
