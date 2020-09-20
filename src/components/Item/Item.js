@@ -10,7 +10,7 @@ const Item = (props) => (
             <span>
             <Checkbox
                 checked={props.isDone}
-                onClick={()=>props.onButton(props.isDone)}
+                onClick={()=>props.onButton(props.id)}
                 ></Checkbox>
                     <span className={
                         classnames({
@@ -21,7 +21,10 @@ const Item = (props) => (
                         >{props.action}
                     </span>
                     <span>
-                        <IconButton aria-label="delete" >
+                        <IconButton 
+                        aria-label="delete"
+                        onClick={()=>props.onDelete(props.id)}
+                        >
                                 <DeleteIcon />
                         </IconButton>
                     </span>
