@@ -52,19 +52,36 @@ class App extends React.Component {
     })
     this.setState({ Itemslist: newItemsList, count: newItemsList.length })
   };
+
+  onAdd = (value) => {
+    this.setState(state => ({
+      Itemslist: [
+        ...state.Itemslist,
+        {
+          id: state.count+1,
+          value,
+          isDone: false
+        },
+      ],
+      count: state.count + 1
+    }))
+  };
   
 
   render() {
     return (
     <div className={styles.container}>
       <h1 className={styles.container_title}>Важные дела</h1>
-      <InputItem />
+      <InputItem 
+        onAdd = {this.onAdd} />
       <ItemList 
-      items={this.state.Itemslist} 
-      onButton={this.onButton}
-      onDelete={this.onDelete}
+        items={this.state.Itemslist} 
+        onButton={this.onButton}
+        onDelete={this.onDelete}
       />
-      <Footer classes={styles} count={this.state.Itemslist.length}/>
+      <Footer 
+        classes={styles} 
+        count={this.state.Itemslist.length}/>
     </div>
   );
   };
