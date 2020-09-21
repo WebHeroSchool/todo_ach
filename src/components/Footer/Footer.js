@@ -13,6 +13,10 @@ class Footer extends React.Component {
                 </span>
             </span>
     };
+
+}
+Footer.defaultProps = {
+    count: 0
 }
 
 export { Footer };

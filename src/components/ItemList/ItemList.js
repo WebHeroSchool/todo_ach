@@ -17,4 +17,11 @@ const ItemList = ({ items, onButton, onDelete }) => (<ul>
     </li>)}
 </ul>);
 
+ItemList.defaultProps = {
+  items: [{
+    value: "Задача по умолчанию",
+    isDone: false,
+    id: 1
+  }]
+}
 export { ItemList };
