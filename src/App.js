@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { InputItem } from './components/InputItem/InputItem';
 import { ItemList } from './components/ItemList/ItemList';
@@ -87,4 +88,11 @@ class App extends React.Component {
   };
 };
 
+App.propTypes = {
+  Itemslist: PropTypes.array,
+  count: PropTypes.number,
+  onAdd: PropTypes.func,
+  onButton: PropTypes.func,
+  onDelete: PropTypes.func
+}
 export default App;
