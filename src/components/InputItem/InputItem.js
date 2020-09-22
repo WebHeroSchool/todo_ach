@@ -7,6 +7,18 @@ import Button from '@material-ui/core/Button';
 import  styles from '../../App.module.css';
 
 class InputItem extends React.Component {
+    componentDidMount() {
+        console.log("InputItem component mounting");
+    }
+    
+    componentDidUpdate() {
+        console.log("InputItem component updating");
+    }
+    
+    componentWillUnmount() {
+        console.log("InputItem component unmounting");
+    }
+
     state = {
         inputValue: '',
         error: false,

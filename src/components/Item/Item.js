@@ -6,30 +6,43 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import  styles from '../../App.module.css';
 
-const Item = (props) => (
-            <span>
+class Item extends React.Component {
+    componentDidMount() {
+        console.log("Item component mounting");
+      }
+    
+      componentDidUpdate() {
+          console.log("Item component updating");
+      }
+    
+      componentWillUnmount() {
+          console.log("Item component unmounting");
+      }
+    render() {
+        return <span>
             <Checkbox
-                checked={props.isDone}
-                onClick={()=>props.onButton(props.id)}
+                checked={this.props.isDone}
+                onClick={()=>this.props.onButton(this.props.id)}
                 ></Checkbox>
                     <span className={
                         classnames({
                             [styles.item]: true,
-                            [styles.done]: props.isDone
+                            [styles.done]: this.props.isDone
                         })
                         }
-                        >{props.action}
+                        >{this.props.action}
                     </span>
                     <span>
                         <IconButton 
                         aria-label="delete"
-                        onClick={()=>props.onDelete(props.id)}
+                        onClick={()=>this.props.onDelete(this.props.id)}
                         >
                                 <DeleteIcon />
                         </IconButton>
                     </span>
-                </span>)
-
+                </span>
+    }
+}
 
 
 
