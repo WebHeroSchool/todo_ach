@@ -1,4 +1,4 @@
-import React from 'react';
+import  React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { InputItem } from './components/InputItem/InputItem';
@@ -6,20 +6,9 @@ import { ItemList } from './components/ItemList/ItemList';
 import { Footer } from './components/Footer/Footer';
 import  styles from './App.module.css';
 
-class App extends React.Component {
-  componentDidMount() {
-    console.log("App component mounting");
-  }
+const App = () => {
 
-  componentDidUpdate() {
-    console.log("App component updating");
-  }
-
-  componentWillUnmount() {
-    console.log("App component unmounting");
-  }
-
-  state = {
+  const initData = {
     Itemslist: [
       {
         id: 1,
@@ -39,13 +28,19 @@ class App extends React.Component {
       count: 6
   };
 
-  //constructor(props) {
-  //  super(props)
-  //  this.onButton = this.onButton.bind(this);
- // }
+  const [Itemslist, setItemslist] = useState(initData.Itemslist);
+  const [count, setCount] = useState(initData.count);
 
-  onButton = (id) => {
-    const newItemsList = this.state.Itemslist.map(item=>{
+  useEffect(()=>{
+    console.log("App component componentDidMount");
+  }, []);
+
+  useEffect(()=>{
+    console.log("App component componentDidUpdate");
+  })
+
+  const onButton = (id) => {
+    const newItemsList = Itemslist.map(item=>{
       const newItem = { ...item }
       if (item.id === id) {
         newItem.isDone = !item.isDone;
@@ -54,57 +49,50 @@ class App extends React.Component {
       return newItem;
 
     });
-    this.setState({Itemslist: newItemsList})
+    setItemslist(newItemsList)
     console.log("press=",id)
   
   }
 
-  onDelete = (id) => {
-    const newItemsList = this.state.Itemslist.filter(item => {
+  const onDelete = (id) => {
+    const newItemsList = Itemslist.filter(item => {
       return item.id !== id
     })
-    this.setState({ Itemslist: newItemsList, count: newItemsList.length })
+    setItemslist(newItemsList);
+    setCount(Itemslist.length)
   };
 
-  onAdd = (value) => {
-    this.setState(state => ({
+  const onAdd = (value) => {
+    const newItem = {
       Itemslist: [
-        ...state.Itemslist,
+        ...Itemslist,
         {
-          id: state.count+1,
+          id: count+1,
           value,
           isDone: false
         },
       ],
-      count: state.count + 1
-    }))
+      count: count + 1
+    }
+    setItemslist(newItem.Itemslist);
+    setCount(newItem.count)
   };
   
-
-  render() {
     return (
     <div className={styles.container}>
       <h1 className={styles.container_title}>Важные дела</h1>
       <InputItem 
-        onAdd = {this.onAdd} />
+        onAdd = {onAdd} />
       <ItemList 
-        items={this.state.Itemslist} 
-        onButton={this.onButton}
-        onDelete={this.onDelete}
+        items={Itemslist} 
+        onButton={onButton}
+        onDelete={onDelete}
       />
       <Footer 
         classes={styles} 
-        count={this.state.Itemslist.length}/>
+        count={Itemslist.length}/>
     </div>
   );
-  };
 };
 
-App.propTypes = {
-  Itemslist: PropTypes.array,
-  count: PropTypes.number,
-  onAdd: PropTypes.func,
-  onButton: PropTypes.func,
-  onDelete: PropTypes.func
-}
 export default App;
