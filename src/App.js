@@ -7,6 +7,18 @@ import { Footer } from './components/Footer/Footer';
 import  styles from './App.module.css';
 
 class App extends React.Component {
+  componentDidMount() {
+    console.log("App component mounting");
+  }
+
+  componentDidUpdate() {
+    console.log("App component updating");
+  }
+
+  componentWillUnmount() {
+    console.log("App component unmounting");
+  }
+
   state = {
     Itemslist: [
       {
