@@ -9,6 +9,8 @@ import  styles from '../../App.module.css';
 class Item extends React.Component {
     componentDidMount() {
         console.log("Item component mounting");
+        this.timerId = setInterval(()=> console.log("interval"), 1000)
+
       }
     
       componentDidUpdate() {
@@ -17,6 +19,7 @@ class Item extends React.Component {
     
       componentWillUnmount() {
           console.log("Item component unmounting");
+          clearInterval(this.timerId)
       }
     render() {
         return <span>
