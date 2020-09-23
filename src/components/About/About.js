@@ -76,8 +76,10 @@ const About = () => {
                 username: login
             }).then(data=>{
                 let wrapped_data = data.data;
-                setIsLoading(false);
-                setReposList(wrapped_data);
+                setTimeout( ()=> {
+                    setIsLoading(false);
+                    setReposList(wrapped_data);
+                },3000);
             }).catch(err => {
                 setError(err);
             });
