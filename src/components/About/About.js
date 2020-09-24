@@ -72,27 +72,28 @@ const About = () => {
     const [avatarURL, setURL] = useState(initData.avatarURL);
       
     useEffect(()=>{
+        setTimeout(() => {
             octokit.repos.listForUser({
                 username: login
             }).then(data=>{
                 let wrapped_data = data.data;
-                setTimeout( ()=> {
                     setIsLoading(false);
                     setReposList(wrapped_data);
-                },3000);
             }).catch(err => {
                 setError(err);
             });
-    },[])
 
-    useEffect(()=>{
-        octokit.users.getByUsername({
-            username:login
-        })
-        .then((response) => {
-           setName(response.data.name);
-           setURL(response.data.avatar_url);
-        });
+            octokit.users.getByUsername({
+                username:login
+            })
+            .then((response) => {
+               setName(response.data.name);
+               setURL(response.data.avatar_url);
+            }).catch(err => {
+                setError(err);
+            });
+        },3000);
+            
     },[])
 
     useEffect(() => { 
@@ -108,15 +109,14 @@ const About = () => {
 
       
     return (<CardContent>
-        <h1>{isLoading ? <CircularProgress /> : 'Обо мне'}</h1>
-         <div>
-             <span>My name is: { name ? name: login }</span>
-             <div><img src={avatarURL} className={styles.image} /></div>
-        </div>
-{ !isLoading && error ? <span>{error}</span> : <ol>
-            { reposList.map((item) =>  (<li key={item.id}><a href={item.html_url} target="blank">{item.name}</a></li>) )}
-            </ol>
-            }
+       {isLoading ? <CircularProgress /> :  <div>
+           <h1>Обо мне</h1>
+            {!isLoading && error ? <span>{error}</span> : 
+            <div><span>My name is: { name ? name: login }</span>
+            <div><img src={avatarURL} className={styles.image} /></div>
+            <ol>{ reposList.map((item) =>  (<li key={item.id}><a href={item.html_url} target="blank">{item.name}</a></li>) )}</ol>
+            </div>}
+            </div>}
     </CardContent>
 )
 
