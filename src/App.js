@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { InputItem } from './components/InputItem/InputItem';
 import { ItemList } from './components/ItemList/ItemList';
@@ -6,6 +7,18 @@ import { Footer } from './components/Footer/Footer';
 import  styles from './App.module.css';
 
 class App extends React.Component {
+  componentDidMount() {
+    console.log("App component mounting");
+  }
+
+  componentDidUpdate() {
+    console.log("App component updating");
+  }
+
+  componentWillUnmount() {
+    console.log("App component unmounting");
+  }
+
   state = {
     Itemslist: [
       {
@@ -87,4 +100,11 @@ class App extends React.Component {
   };
 };
 
+App.propTypes = {
+  Itemslist: PropTypes.array,
+  count: PropTypes.number,
+  onAdd: PropTypes.func,
+  onButton: PropTypes.func,
+  onDelete: PropTypes.func
+}
 export default App;

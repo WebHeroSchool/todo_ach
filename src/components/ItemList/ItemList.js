@@ -3,19 +3,36 @@ import React from 'react';
 import { Item } from '../Item/Item';
 import styles from '../../App.module.css';
 
-const ItemList = ({ items, onButton, onDelete }) => (<ul>
-    {items.map((item,index) => <li key={item.id}
+class ItemList extends React.Component {
+  componentDidMount() {
+    console.log("ItemList component mounting")
+  }
+  
+  componentDidUpdate() {
+      console.log("ItemList component updating")
+  }
+  
+  componentWillUnmount() {
+      console.log("ItemList component unmounting")
+  }
+
+  render() {
+    return <ul>
+    {this.props.items.map((item,index) => <li key={item.id}
     >
        <span className={styles.container_list}>
          <Item 
          action={item.value} 
          isDone={item.isDone} 
          id={item.id} 
-         onButton={onButton}
-         onDelete={onDelete}
+         onButton={this.props.onButton}
+         onDelete={this.props.onDelete}
         /></span>
     </li>)}
-</ul>);
+</ul>
+  }
+  
+}
 
 ItemList.defaultProps = {
   items: [{
