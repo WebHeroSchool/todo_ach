@@ -6,47 +6,44 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import  styles from '../../App.module.css';
 
-class Item extends React.Component {
-    componentDidMount() {
+const Item = (props) => {
+    const componentDidMount = () => {
         console.log("Item component mounting");
-        this.timerId = setInterval(()=> console.log("interval"), 1000)
+        //this.timerId = setInterval(()=> console.log("interval"), 1000)
 
       }
     
-      componentDidUpdate() {
+      const componentDidUpdate = () => {
           console.log("Item component updating");
       }
     
-      componentWillUnmount() {
+      const componentWillUnmount = () => {
           console.log("Item component unmounting");
-          clearInterval(this.timerId)
+          //clearInterval(this.timerId)
       }
-    render() {
-        return <span>
-            <Checkbox
-                checked={this.props.isDone}
-                onClick={()=>this.props.onButton(this.props.id)}
-                ></Checkbox>
-                    <span className={
-                        classnames({
-                            [styles.item]: true,
-                            [styles.done]: this.props.isDone
-                        })
-                        }
-                        >{this.props.action}
-                    </span>
-                    <span>
-                        <IconButton 
-                        aria-label="delete"
-                        onClick={()=>this.props.onDelete(this.props.id)}
-                        >
-                                <DeleteIcon />
-                        </IconButton>
-                    </span>
+    
+    return <span>
+        <Checkbox
+            checked={props.isDone}
+            onClick={()=>props.onButtonHandler(props.id)}
+            ></Checkbox>
+                <span className={
+                    classnames({
+                        [styles.item]: true,
+                        [styles.done]: props.isDone
+                    })
+                    }
+                    >{props.action}
                 </span>
-    }
+                <span>
+                    <IconButton 
+                    aria-label="delete"
+                    onClick={()=>props.onDeleteHandler(props.id)}
+                    >
+                            <DeleteIcon />
+                    </IconButton>
+                </span>
+            </span>
 }
-
-
 
 export { Item };
