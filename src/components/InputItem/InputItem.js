@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import  styles from '../../App.module.css';
+import  styles from './InputItem.module.css';
 
 const InputItem = (props) => {
     const initData = {
@@ -31,29 +31,28 @@ const InputItem = (props) => {
         
     }
 
-    return (<div className= {
-        classnames({
-            [styles.input]: true,
-        })
-        }>
-        <TextField
+    return (<div>
+        {error ? <span style={{color: "red"}}>{validationText}</span> : '' }
+        <input
+            type='text'
+            className={styles.input}
             id="standard-dense"
-            label="Добавить задачу"
+            placeholder='Просто введите сюда название дела'
             margin="dense"
             value={inputValue}
             onChange={(event)=> setInputValue(event.target.value.toUpperCase())}
-            error= {error}
             helperText = {validationText}
             required
             />
-            <span style={{color: "red"}}>{error["error"]}</span>
 
-        <Button 
+        <input
+            type='button'
+            className={styles['button_add']}
             variant="contained"
             color="default"
             fullWidth
-            onClick={onButtonClickHandler}
-            >Добавить</Button>
+            onClick={() => onButtonClickHandler()}
+            />
 
     </div>)
 }

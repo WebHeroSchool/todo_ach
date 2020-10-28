@@ -4,7 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import  styles from '../../App.module.css';
+import  styles from './Item.module.css';
+import CardWrapper from '../hoc/CardWrapper/CardWrapper';
 
 const Item = (props) => {
     const componentDidMount = () => {
@@ -22,28 +23,27 @@ const Item = (props) => {
           //clearInterval(this.timerId)
       }
     
-    return <span>
-        <Checkbox
-            checked={props.isDone}
-            onClick={()=>props.onButtonHandler(props.id)}
-            ></Checkbox>
-                <span className={
-                    classnames({
-                        [styles.item]: true,
-                        [styles.done]: props.isDone
-                    })
-                    }
-                    >{props.action}
-                </span>
-                <span>
-                    <IconButton 
-                    aria-label="delete"
+    return <span className={styles.wrapper}>
+          <input
+        type='checkbox'
+        className={styles.checkbox}
+        id={props.id}
+        defaultChecked={props.isDone}
+      />
+      <label
+        htmlFor={props.id}
+        className={styles.label}
+        onClick={() => props.onButtonHandler(props.id)}
+      >
+        {props.action}
+      </label>
+                    <button 
+                    className={styles['button_delete']}
+                    
                     onClick={()=>props.onDeleteHandler(props.id)}
                     >
-                            <DeleteIcon />
-                    </IconButton>
-                </span>
-            </span>
+                    </button>
+        </span>
 }
 
 export { Item };

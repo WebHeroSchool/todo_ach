@@ -2,31 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { InputItem } from '../InputItem/InputItem';
 import { ItemList } from '../ItemList/ItemList';
 import { Footer } from '../Footer/Footer';
-import  styles from '../../App.module.css';
-
+import  styles from './ToDo.module.css';
+import classnames from 'classnames';
+//<Footer 
+//classes={styles} 
+//count={Itemslist.length}
+//items={Itemslist}
+///>
 const ToDo = () => {
     const initData = {
-        Itemslist: [
-          {
-            id: 1,
-            value: 'первое - проснуться пораньше',
-            isDone: false
-          },
-          {
-            id: 2,
-            value:'второе - почитать',
-            isDone: true
-          },
-          {
-            id:3,
-            value: 'третье - погулять',
-            isDone: false
-          }],
-          count: 6
+        Itemslist: [],
+          count: 0,
+          activeLink: 'all'
       };
     
     const [Itemslist, setItemslist] = useState(initData.Itemslist);
     const [count, setCount] = useState(initData.count);
+    const [activeLink, setActiveLink] = useState(initData.activeLink);
+    const onClickSetActive = item => setActiveLink(item.id);
+
+    const filters = [
+        {
+          id: 'incompleted',
+          name: 'Незавершенные',
+          count: Itemslist.filter(item => !item.isDone).length
+        },
+        {
+          id: 'completed',
+          name: 'Завершенные',
+          count:  Itemslist.filter(item => item.isDone).length
+        },
+        {
+          id: 'all',
+          name: 'Все',
+          count: count
+        }
+      ];
     
     useEffect(() => {
         console.log("App component componentDidMount");
@@ -56,7 +67,7 @@ const ToDo = () => {
             return item.id !== id
         })
         setItemslist(newItemsList);
-        setCount(Itemslist.length);
+        setCount(newItemsList.length);
     };
     
     const onAddHandler = (value) => {
@@ -76,19 +87,39 @@ const ToDo = () => {
     };
       
     return (
-        <div className={styles.container}>
-            <h1 className={styles.container_title}>Важные дела</h1>
-            <InputItem 
-            onAddHandler = {onAddHandler} />
+        <section className={styles.todo}>
+            <div className={styles.header}>
+                <h1 className={styles.heading}>Список моих дел</h1>
+                <ul className={styles['filters-list']}>
+        {filters
+          .filter(item => item)
+          .map(item => (
+            <li key={item.id}>
+              <button
+              className={classnames({
+                [styles.button]: true,
+                [styles.active]: (item.id === activeLink)
+              })}
+              onClick={() => onClickSetActive(item)}
+              >
+                {item.name + ' '}
+                <span className={styles.number}>{item.count}</span>
+              </button>
+            </li>
+          ))}
+      </ul>
+                
+            </div>
             <ItemList 
             items={Itemslist} 
             onButtonHandler={onButtonHandler}
             onDeleteHandler={onDeleteHandler}
+            activeLink={activeLink}
             />
-            <Footer 
-            classes={styles} 
-            count={Itemslist.length}/>
-        </div>
+            <InputItem 
+            onAddHandler = {onAddHandler} />
+            
+        </section>
     );
 };
 

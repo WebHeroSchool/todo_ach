@@ -1,24 +1,42 @@
 import React from 'react';
 
 import { Item } from '../Item/Item';
-import styles from '../../App.module.css';
+import styles from './ItemList.module.css';
 
 const ItemList = (props) => {
-
+  function checkLink(item) {
+    console.log(props.activeLink)
+    if(props.activeLink == 'all') {
+      return true;
+    }
+    if (props.activeLink == 'completed') {
+      return item.isDone;
+    }
+    return !item.isDone;
+  }
   return (
-  <ul>
-  {props.items.map((item,index) => <li key={item.id}
+    <section className={styles.section}>
+  {props.items.length > 0 && <ul className={styles['item-list']}>
+  {props.items.filter(item => checkLink(item)).map((item,index) => <li key={item.id} className={styles.item}
   >
-      <span className={styles.container_list}>
         <Item 
         action={item.value} 
         isDone={item.isDone} 
         id={item.id} 
         onButtonHandler={props.onButtonHandler}
         onDeleteHandler={props.onDeleteHandler}
-      /></span>
+      />
   </li>)}
-</ul>);
+</ul>}
+{!props.items.length > 0 && <div className={styles['div_snafu']}>
+          <img className={styles.snafu} src={require('../../img/empty-list.svg')} alt='empty tasks' />
+          <h2 className={styles.subheading}>Вы еще не добавили ни одной задачи</h2>
+          <p className={styles.paragraph}>
+            Сделайте это прямо сейчас
+          </p>
+        </div>}
+</section>
+);
   
 }
 

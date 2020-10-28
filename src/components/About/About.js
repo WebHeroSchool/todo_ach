@@ -3,7 +3,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CardContent from '@material-ui/core/CardContent';
 import { Octokit } from '@octokit/rest';
 
-import  styles from '../../App.module.css';
+import  styles from './About.module.css';
+import { Contacts } from '../Contacts/Contacts';
+import { Repos } from '../Repos/Repos';
+import CardWrapper from '../hoc/CardWrapper/CardWrapper';
 
 const octokit = new Octokit();
 
@@ -15,10 +18,8 @@ const octokit = new Octokit();
         error: '',
         name: ''
     }
-
     componentDidMount() {
         console.log("About componentDidMount")
-
         octokit.repos.listForUser({
             username: this.state.login
         }).then(response => {
@@ -27,7 +28,6 @@ const octokit = new Octokit();
         }).catch(err => {
             this.setState({isLoading: false, error: err});
         });
-
         octokit.users.getByUsername({
             username: this.state.login,
         })
@@ -38,7 +38,6 @@ const octokit = new Octokit();
             });
         });
     }
-
     render() {
         const {isLoading, reposList, login, name , avatarURL, error } = this.state;
         return (<CardContent>
@@ -63,13 +62,17 @@ const About = () => {
         reposList: [],
         error: '',
         name: '',
-        avatarURL: ''
+        bio: '',
+        avatarURL: '',
+        gitUrl: ''
     };
     const [isLoading, setIsLoading] = useState(initData.isLoading);
     const [reposList, setReposList] = useState(initData.reposList);
     const [error, setError] = useState(initData.error);
     const [name, setName] = useState(initData.name);
+    const [bio, setBio] = useState(initData.bio);
     const [avatarURL, setURL] = useState(initData.avatarURL);
+    const [gitUrl, setGitUrl] = useState(initData.gitUrl);
       
     useEffect(()=>{
         setTimeout(() => {
@@ -88,7 +91,9 @@ const About = () => {
             })
             .then((response) => {
                setName(response.data.name);
+               setBio(response.data.bio);
                setURL(response.data.avatar_url);
+               setGitUrl(response.data.url);
             }).catch(err => {
                 setError(err);
             });
@@ -108,17 +113,18 @@ const About = () => {
       }, []);
 
       
-    return (<CardContent>
-       {isLoading ? <CircularProgress /> :  <div>
-           <h1>Обо мне</h1>
-            {!isLoading && error ? <span>{error}</span> : 
-            <div><span>My name is: { name ? name: login }</span>
-            <div><img src={avatarURL} className={styles.image} /></div>
-            <ol>{ reposList.map((item) =>  (<li key={item.id}><a href={item.html_url} target="blank">{item.name}</a></li>) )}</ol>
-            </div>}
-            </div>}
-    </CardContent>
-)
+    return (
+    <CardWrapper>
+        {isLoading ? <CircularProgress /> :
+        <CardWrapper>{ !isLoading && error ? <span>{error}</span> :<CardWrapper>
+            <Contacts name={name}  bio={bio} login={login} avatarURL={avatarURL} gitUrl={gitUrl}/>
+            <Repos reposList={reposList} />
+            </CardWrapper>
+            }
+        </CardWrapper>
+    }
+    </CardWrapper>
+    )
 
 }
 
