@@ -13,12 +13,14 @@ const ToDo = () => {
     const initData = {
         Itemslist: [],
           count: 0,
-          activeLink: 'all'
+          activeLink: 'all',
+          fixitem: false
       };
     
     const [Itemslist, setItemslist] = useState(initData.Itemslist);
     const [count, setCount] = useState(initData.count);
     const [activeLink, setActiveLink] = useState(initData.activeLink);
+    const [fixitem, setFixItem] = useState(initData.fixitem);
     const onClickSetActive = item => setActiveLink(item.id);
 
     const filters = [
@@ -85,6 +87,29 @@ const ToDo = () => {
         setItemslist(newItem.Itemslist);
         setCount(newItem.count);
     };
+
+    const onDoublenHandler = (value) => {
+      let item = Itemslist.find(item => {
+        if (item.id == value) {
+          console.log(value, item)
+          return item.value;
+        }
+        
+      })
+      console.log(item.value)
+      return item.value
+    };
+
+    const onItemFixHandler = (id, newValue) => {
+      const newItem = {
+        Itemslist: [
+        ...Itemslist,
+        ],
+      }
+      newItem.Itemslist.map(item => {if (item.id == id) { item.value = newValue }})
+      setItemslist(newItem.Itemslist);
+      console.log(Itemslist)
+    }
       
     return (
         <section className={styles.todo}>
@@ -114,6 +139,8 @@ const ToDo = () => {
             items={Itemslist} 
             onButtonHandler={onButtonHandler}
             onDeleteHandler={onDeleteHandler}
+            onDoublenHandler={onDoublenHandler}
+            onItemFixHandler={onItemFixHandler}
             activeLink={activeLink}
             />
             <InputItem 

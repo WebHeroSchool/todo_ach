@@ -45,3 +45,12 @@
 .button_delete:hover {
     cursor: pointer;
 }
+
+.input {
+    margin-right: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 41px;
+    padding: 10px 12px;
+    flex-grow: 1;
+    outline: none;
+}

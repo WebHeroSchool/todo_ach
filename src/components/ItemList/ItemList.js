@@ -25,6 +25,8 @@ const ItemList = (props) => {
         id={item.id} 
         onButtonHandler={props.onButtonHandler}
         onDeleteHandler={props.onDeleteHandler}
+        onDoublenHandler={props.onDoublenHandler}
+        onItemFixHandler={props.onItemFixHandler}
       />
   </li>)}
 </ul>}

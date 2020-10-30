@@ -31,7 +31,7 @@ const InputItem = (props) => {
         
     }
 
-    return (<div>
+    return (<div style={{display: "flex"}}>
         {error ? <span style={{color: "red"}}>{validationText}</span> : '' }
         <input
             type='text'

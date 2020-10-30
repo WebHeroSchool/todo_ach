@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import classnames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,20 +8,16 @@ import  styles from './Item.module.css';
 import CardWrapper from '../hoc/CardWrapper/CardWrapper';
 
 const Item = (props) => {
-    const componentDidMount = () => {
-        console.log("Item component mounting");
-        //this.timerId = setInterval(()=> console.log("interval"), 1000)
+  const initData = {
+    fixitem: false,
+    currentName: ''
+  };
+  const [fixitem, setFixItem] = useState(initData.fixitem);
+  const [currentName, setcurrentName] = useState(initData.currentName);
 
-      }
-    
-      const componentDidUpdate = () => {
-          console.log("Item component updating");
-      }
-    
-      const componentWillUnmount = () => {
-          console.log("Item component unmounting");
-          //clearInterval(this.timerId)
-      }
+  const onBlur = () => {
+    setFixItem(false);
+  };
     
     return <span className={styles.wrapper}>
           <input
@@ -30,13 +26,29 @@ const Item = (props) => {
         id={props.id}
         defaultChecked={props.isDone}
       />
-      <label
+      {!fixitem ?<label
         htmlFor={props.id}
         className={styles.label}
         onClick={() => props.onButtonHandler(props.id)}
+        onDoubleClick={() => {
+          setFixItem(true)
+          //setcurrentName(props.onDoublenHandler(props.id))
+          console.log(currentName)
+        }}
       >
         {props.action}
-      </label>
+      </label> :  <input
+            type='text'
+            className={styles.input}
+            id="inputval"
+            margin="dense"
+            value={props.onDoublenHandler(props.id)}
+            onChange={(event)=> {
+              props.onItemFixHandler(props.id, event.target.value.toUpperCase())
+              }
+            }
+            onBlur={ onBlur } 
+            />}
                     <button 
                     className={styles['button_delete']}
                     
