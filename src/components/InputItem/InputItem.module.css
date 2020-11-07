@@ -27,30 +27,3 @@
 .button_add:hover {
     cursor: pointer;
 }
-
-.snafu {
-position: relative;
-}
-
-.snafu::before {
-    position: absolute;
-    top: -58px;
-    content: 'Такая задача уже есть. Неужели нельзя что-то новое придумать?';
-    width: 242px;
-    padding: 8px;
-    font-size: 14px;
-    color: #fff;
-    background-color: #356eff;
-    border-radius: 6px;
-}
-
-.snafu::after {
-    position: absolute;
-    content: '';
-    width: 13px;
-    height: 7px;
-    top: -10px;
-    left: 20px;
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-    background-color: #356eff;
-}
