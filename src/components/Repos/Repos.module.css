@@ -136,4 +136,17 @@ button:enabled:active {
 .paragraph {
     align-self: center;
 }
-  
+
+@media (max-width: 813px) {
+    .section_repos {
+        position: relative;
+        height: 432px;
+        box-sizing: border-box;
+        padding: 64px 13px 22px 13px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+        border-radius: 9px;
+        display: flex;
+        flex-direction: column;
+      }
+    
+}

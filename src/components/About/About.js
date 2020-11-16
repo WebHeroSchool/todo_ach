@@ -115,7 +115,7 @@ const About = () => {
       
     return (
     <CardWrapper>
-        {isLoading ? <CircularProgress /> :
+        {isLoading ? <CircularProgress style={{display: "block", marginLeft: "auto", marginRight: "auto" }}/> :
         <CardWrapper>{ !isLoading && error ? <span>{error}</span> :<CardWrapper>
             <Contacts name={name}  bio={bio} login={login} avatarURL={avatarURL} gitUrl={gitUrl}/>
             <Repos reposList={reposList} />

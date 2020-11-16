@@ -4,20 +4,17 @@ import { ItemList } from '../ItemList/ItemList';
 import { Footer } from '../Footer/Footer';
 import  styles from './ToDo.module.css';
 import classnames from 'classnames';
-//<Footer 
-//classes={styles} 
-//count={Itemslist.length}
-//items={Itemslist}
-///>
+
 const ToDo = () => {
     const initData = {
-        Itemslist: [],
+        Itemslist: [] ,
           count: 0,
           activeLink: 'all',
           fixitem: false
-      };
+    };
     
-    const [Itemslist, setItemslist] = useState(initData.Itemslist);
+    const Data = localStorage.getItem('Itemslist')
+    const [Itemslist, setItemslist] = useState(Data?JSON.parse(Data):initData.Itemslist);
     const [count, setCount] = useState(initData.count);
     const [activeLink, setActiveLink] = useState(initData.activeLink);
     const [fixitem, setFixItem] = useState(initData.fixitem);
@@ -43,7 +40,8 @@ const ToDo = () => {
     
     useEffect(() => {
         console.log("App component componentDidMount");
-    }, []);
+        localStorage.setItem('Itemslist', JSON.stringify(Itemslist));
+    }, [Itemslist]);
     
     useEffect(()=>{
         console.log("App component componentDidUpdate");

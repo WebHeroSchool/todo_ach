@@ -103,3 +103,20 @@ transition: transform 0.5s ease;
 .telegram:hover {
 transform-origin: 0 0;
 }
+
+
+@media (max-width: 813px) {
+  .section_about {
+    display: block;
+    grid-template-columns: max-content auto;
+    grid-template-rows: repeat(3, max-content) auto;
+    grid-column-gap: 40px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 200px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    border-radius: 9px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+}
+}
