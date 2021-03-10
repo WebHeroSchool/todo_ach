@@ -1,37 +1,38 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import { NavLink } from 'react-router-dom';
 
-import { InputItem } from './components/InputItem/InputItem';
-import { ItemList } from './components/ItemList/ItemList';
-import { Footer } from './components/Footer/Footer';
+import { ToDo } from './components/ToDo/ToDo';
+import { About } from './components/About/About';
+import { Contacts } from './components/Contacts/Contacts';
 import  styles from './App.module.css';
 
-class App extends React.Component {
-  state = {
-    Itemslist: [
-      {
-        value: 'первое',
-        isDone: false
-      },
-      {
-        value:'второе',
-        isDone: true
-      },
-      {
-        value: 'третье',
-        isDone: false
-      }]
-  };
-
-  render() {
+const App = () => {
     return (
-    <div className={styles.container}>
-      <h1 className={styles.container_title}>Важные дела</h1>
-      <InputItem />
-      <ItemList items={this.state.Itemslist}/>
-      <Footer classes={styles} count={3}/>
-    </div>
+      <Router>
+        <div className={styles.main_container}>
+          <header className={styles.header}>
+            <NavLink
+              className={styles.navlink}
+              activeClassName={styles.active}
+              to="/"
+              exact
+            >Обо мне</NavLink>
+            <NavLink
+              className={styles.navlink}
+              activeClassName={styles.active}
+              to="/todo"
+              exact
+            >Дела</NavLink>
+          </header>
+          <Route path="/" exact component={About} />
+          <Route path="/todo" component={ToDo} />
+          <Route path="/contact" component={Contacts} />
+        </div>
+      </Router>
   );
-  };
 };
 
 export default App;

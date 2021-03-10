@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+.input {
+    margin-right: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 41px;
+    padding: 10px 12px;
+    flex-grow: 1;
+    outline: none;
+}
+
+.input:invalid {
+    box-shadow: none;
+}
+
+.button_add {
+    width: 36px;
+    height: 36px;
+    background: url('../../img/button-add.svg');
+    border: none;
+    outline: none;
+}
+
+.button_add:hover {
+    cursor: pointer;
+}

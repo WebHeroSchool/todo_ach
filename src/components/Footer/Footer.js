@@ -1,18 +1,53 @@
-import React from 'react';
-import styles from '../../App.module.css';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-class Footer extends React.Component {
-    render() {
-        return <span>Дел осталось: 
-            <span className={ styles.footer }>{ this.props.count }</span><br/>
-                <span>
-                    <button variant="contained">Все</button>
-                    <button variant="contained">Активные</button>
-                    <button variant="contained">Выполненные</button>
-                    <button variant="contained">Удалить выполненные дела</button>
-                </span>
-            </span>
+const Footer = (props) => {
+    const initData = {
+        activeLink: 'all'
     };
+
+    const [activeLink, setActiveLink] = useState(initData.activeLink);
+    const onClickSetActive = item => setActiveLink(item.id);
+
+    const filters = [
+        {
+          id: 'incompleted',
+          name: 'Незавершенные',
+          count: props.items.filter(item => !item.isDone).length
+        },
+        {
+          id: 'completed',
+          name: 'Завершенные',
+          count:  props.items.filter(item => item.isDone).length
+        },
+        {
+          id: 'all',
+          name: 'Все',
+          count: props.count
+        }
+      ];
+        return (<ul className={props.classes['filters-list']}>
+        {filters
+          .filter(item => item)
+          .map(item => (
+            <li key={item.id}>
+              <button
+              className={classnames({
+                [props.classes.button]: true,
+                [props.classes.active]: (item.id === activeLink)
+              })}
+              onClick={() => onClickSetActive(item)}
+              >
+                {item.name + ' '}
+                <span className={props.classes.number}>{item.count}</span>
+              </button>
+            </li>
+          ))}
+      </ul>)
+}
+Footer.defaultProps = {
+    count: 0
 }
 
 export { Footer };

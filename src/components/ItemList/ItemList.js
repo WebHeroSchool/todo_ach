@@ -1,26 +1,53 @@
 import React from 'react';
-import classnames from 'classnames';
 
 import { Item } from '../Item/Item';
-import styles from '../../App.module.css';
+import styles from './ItemList.module.css';
 
-class ItemList extends React.Component {
-  state = {
-    actions: ['проснуться пораньше','почитать','погулять']
-  };
+const ItemList = (props) => {
+  function checkLink(item) {
+    console.log(props.activeLink)
+    if(props.activeLink == 'all') {
+      return true;
+    }
+    if (props.activeLink == 'completed') {
+      return item.isDone;
+    }
+    return !item.isDone;
+  }
+  return (
+    <section className={styles.section}>
+  {props.items.length > 0 && <ul className={styles['item-list']}>
+  {props.items.filter(item => checkLink(item)).map((item,index) => <li key={item.id} className={styles.item}
+  >
+        <Item 
+        action={item.value} 
+        isDone={item.isDone} 
+        id={item.id} 
+        onButtonHandler={props.onButtonHandler}
+        onDeleteHandler={props.onDeleteHandler}
+        onDoublenHandler={props.onDoublenHandler}
+        onItemFixHandler={props.onItemFixHandler}
+      />
+  </li>)}
+</ul>}
+{!props.items.length > 0 && <div className={styles['div_snafu']}>
+          <img className={styles.snafu} src={require('../../img/empty-list.svg')} alt='empty tasks' />
+          <h2 className={styles.subheading}>Вы еще не добавили ни одной задачи</h2>
+          <p className={styles.paragraph}>
+            Сделайте это прямо сейчас
+          </p>
+        </div>}
+</section>
+);
+  
+}
 
-  render() {
-    return <ul>
-            {this.props.items.map((item,index) => <li key={item.value}>
-              <span className={classnames({
-                [styles.container_list]: true,
-                [styles.done]: item.isDone
-              })}> {item.value}- 
-                <Item action={this.state.actions[index]} isDone={item.isDone}/></span>
-            </li>)}
-        </ul>
-  };
+ItemList.defaultProps = {
+  items: [{
+    value: "Задача по умолчанию",
+    isDone: false,
+    id: 1
+  }]
 };
-
 
 export { ItemList };
